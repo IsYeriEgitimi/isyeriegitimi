@@ -7,5 +7,5 @@ Grup üyeleri:
 4. Burak F. CİLBİR (Frontend Developer)
 
 # Amacımız
-Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği bölümünde okuyan 4. sınıfta iş yeri eğitimi alacak öğrenciler için okulumuzun anlaşma sağladığı şirketler hakkında bilgi ve öneri veren bir sistem oluşturmak.
+* Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği bölümünde okuyan 4. sınıfta iş yeri eğitimi alacak öğrenciler için okulumuzun anlaşma sağladığı şirketler hakkında bilgi ve öneri veren bir sistem oluşturmak.
 
