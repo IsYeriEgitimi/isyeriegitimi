@@ -1,5 +1,4 @@
-# İŞ YERİ EĞİTİMİ PROJE
-
+# İŞ YERİ EĞİTİMİ
 Grup üyeleri
 * Hasan YALÇIN (Scrum Master, Analyst)
 * Ömer KÜLAHCI (Backend Developer)
