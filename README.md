@@ -17,4 +17,4 @@ Grup üyeleri
 * Son iki sene içeçrisinde anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
 
 # Misyonumuz
-İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini filtreleyip kendisine en uygun iş yerini bulmasını sağlamak.
+* İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini filtreleyip kendisine en uygun iş yerini bulmasını sağlamak.
