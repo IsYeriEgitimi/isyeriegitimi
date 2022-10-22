@@ -8,7 +8,7 @@ Grup üyeleri
 # Kullanılan Teknolojiler
 * Java
 * React
-* MS SQL
+* MySQL
 
 
 # Amacımız
