@@ -28,4 +28,10 @@ public class CompanyManager implements CompanyService{
 		return new Result(true, "Şirket eklendi");
 	}
 
+	@Override
+	public Result delete(int id) {
+		companyRepository.deleteById(id);
+		return new Result(true, "Şirket silindi");
+	}
+
 }

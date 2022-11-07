@@ -30,4 +30,10 @@ public class UserManager implements UserService{
 		return new Result(true, "Kullanıcı eklendi");
 	}
 
+	@Override
+	public Result delete(int id) {
+		userRepository.deleteById(id);
+		return new Result(true, "Kullanıcı silindi");
+	}
+
 }

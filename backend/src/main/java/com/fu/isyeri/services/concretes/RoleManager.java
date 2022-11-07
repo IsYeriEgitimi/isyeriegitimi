@@ -30,4 +30,10 @@ public class RoleManager implements RoleService{
 		return new Result(true, "Rol eklendi");
 	}
 
+	@Override
+	public Result delete(int id) {
+		roleRepository.deleteById(id);
+		return new Result(true, "Rol silindi");
+	}
+
 }

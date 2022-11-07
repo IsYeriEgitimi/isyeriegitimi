@@ -10,4 +10,6 @@ public interface CompanyService {
 	DataResult<List<Company>> getAll();
 
 	Result add(Company company);
+	
+	Result delete(int id);
 }
