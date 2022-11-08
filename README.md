@@ -20,4 +20,10 @@ Grup üyeleri
 
 # KULLANILAN DİYAGRAMLAR
   * USE-CASE
+  
   ![Proje_use-case](https://user-images.githubusercontent.com/115798059/200509572-8b6758c8-d1ec-4638-97d8-102965a26eb7.png)
+  
+  * ER 
+  
+  ![Proje_ER](https://user-images.githubusercontent.com/115798059/200510063-b2c00f14-7e71-42a7-b4a6-181e247ee1de.png)
+
