@@ -1,11 +1,11 @@
 package com.fu.isyeri.services.concretes;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.fu.isyeri.entities.User;
 import com.fu.isyeri.repository.UserRepository;
-import com.fu.isyeri.result.DataResult;
 import com.fu.isyeri.result.Result;
 import com.fu.isyeri.services.abstracts.UserService;
 
@@ -21,10 +21,10 @@ public class UserManager implements UserService{
 	}
 
 	@Override
-	public DataResult<List<User>> getAll() {
-		return new DataResult<List<User>>(userRepository.findAll(), true, "Kullanıcılar getirildi");
+	public Page<User> getAll(Pageable page) {
+		return userRepository.findAll(page);
 	}
-
+	
 	@Override
 	public Result add(User user) {
 		String encryptedPassword = this.passwordEncoder.encode(user.getPassword());

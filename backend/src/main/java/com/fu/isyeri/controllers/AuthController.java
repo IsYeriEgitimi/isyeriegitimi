@@ -23,6 +23,7 @@ public class AuthController {
 	AuthResult handleAuthentication(@RequestBody Credentials credentials) {
 		return userAuthService.authenticate(credentials);
 	}
+	
 	@PostMapping("logout")
 	AuthResult handleLogout() {
 		return null;
