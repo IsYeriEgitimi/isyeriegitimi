@@ -18,6 +18,7 @@ export const loginHandler = credentials => {
         const response = await loginRequest(credentials);
         const authState = {
             ...response.data.user,
+            token: response.data.token
         }
         dispatch(loginSuccessAction(authState));
         return response;

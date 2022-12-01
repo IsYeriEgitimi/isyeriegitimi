@@ -30,7 +30,7 @@ const updateStateInStorage = newState => {
 const configureStore = () => {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     const initialState = getStateFromLocalStorage();
-    //setAuthorizationHeader(initialState);
+    setAuthorizationHeader(initialState);
 
     const store = legacy_createStore(authReducer, initialState, composeEnhancers(applyMiddleware(thunk)));
     
