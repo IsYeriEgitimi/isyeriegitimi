@@ -4,7 +4,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.fu.isyeri.dto.UserUpdateDto;
 import com.fu.isyeri.entities.User;
+import com.fu.isyeri.errors.NotFoundException;
 import com.fu.isyeri.repository.UserRepository;
 import com.fu.isyeri.result.Result;
 import com.fu.isyeri.services.abstracts.UserService;
@@ -34,9 +36,27 @@ public class UserManager implements UserService{
 	}
 
 	@Override
-	public Result delete(int id) {
-		userRepository.deleteById(id);
+	public Result delete(String usernname) {
+		User user = getUserByUsername(usernname);
+		userRepository.delete(user);
 		return new Result(true, "Kullanıcı silindi");
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		User user = userRepository.findByUsername(username);
+		if (user == null) {
+			throw new NotFoundException();
+		}
+		return user;
+	}
+	
+	@Override
+	public User update(String username, UserUpdateDto userUpdateDto) {
+		User user =  getUserByUsername(username);
+		user.setDisplayName(userUpdateDto.getDisplayName());
+		user.setRole(userUpdateDto.getRole());
+		return userRepository.save(user);
 	}
 
 }

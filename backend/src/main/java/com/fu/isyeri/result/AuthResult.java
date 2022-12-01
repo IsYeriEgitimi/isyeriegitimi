@@ -7,5 +7,7 @@ import lombok.Data;
 public class AuthResult {
 
 	private UserDto user;
+	
+	private String token;
 
 }
