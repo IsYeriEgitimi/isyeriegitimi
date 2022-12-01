@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Form, Container, Grid } from 'semantic-ui-react';
+import { Button, Form, Container, Grid, Message } from 'semantic-ui-react';
 import { useApiProgress } from './../shared/ApiProgress';
 import { loginHandler } from '../store/actions/AuthActions';
 import { useNavigate } from 'react-router-dom';
@@ -12,27 +12,30 @@ const LoginPage = () => {
     const [password, setPassword] = useState();
     const [error, setError] = useState();
     const dispatch = useDispatch();
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
+
+
+
+    useEffect(() => { setError(undefined) }, [username, password]);
 
     const onClickLogin = async (event) => {
         event.preventDefault();
         const creds = {
             username,
             password
-        };
+        }
         try {
             await dispatch(loginHandler(creds));
             navigate("/admin-panel");
-           
         } catch (apiError) {
-            if (error.response.data.validationErrors) {
-                setError(error.response.data.validationErrors);
+            if (apiError.response.data.validationErrors) {
+                setError(apiError.response.data.validationErrors);
             }
-            if (error.response.data.message) {
-                setError(error.response.data.message);
+            if (apiError.response.data.message) {
+                setError(apiError.response.data.message);
             }
         }
-        
+
     }
 
     return (
@@ -50,8 +53,12 @@ const LoginPage = () => {
                                 <input placeholder='Şifre' onChange={(event) => { setPassword(event.target.value) }} />
                             </Form.Field>
                             <Form.Field>
+                                <Form.Field>
+                                    
+                                   {error && <Message size='tiny' color='yellow'>{error}</Message> }
+                                </Form.Field>
                             </Form.Field>
-                            <div >
+                            <div>
                                 <Button loading={pendingApiCall} inverted color='violet' type='submit' onClick={onClickLogin}>Giris yap</Button>
                             </div>
                         </Form>
