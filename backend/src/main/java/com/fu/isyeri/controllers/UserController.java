@@ -35,18 +35,19 @@ public class UserController {
 	}
 	
 	@PostMapping("/add")
+	@PreAuthorize("principal.role.level == 2")
 	public Result add(@Valid @RequestBody User user){
 		return userService.add(user);
 	}
 	
 	@DeleteMapping("/delete/{username}")
-	@PreAuthorize("principal.role.name == 'Admin'")
+	@PreAuthorize("principal.role.level == 2")
 	public Result delete(@PathVariable String username) {
 		return userService.delete(username);
 	}
 	
 	@PutMapping("/update/{username}")
-	@PreAuthorize("principal.role.name == 'Admin'")
+	@PreAuthorize("principal.role.level == 2")
 	public DataResult<UserDto>update(@Valid @RequestBody UserUpdateDto userUpdateDto, @PathVariable String username){
 		User user = userService.update(username, userUpdateDto);
 		return new DataResult<UserDto>(new UserDto(user), true, "Kullanıcı güncellendi");

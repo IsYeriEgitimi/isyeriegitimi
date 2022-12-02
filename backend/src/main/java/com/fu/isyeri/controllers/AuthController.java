@@ -12,7 +12,7 @@ import com.fu.isyeri.services.abstracts.UserAuthService;
 
 
 @RestController
-@RequestMapping("/api/1.0")
+@RequestMapping("/api/1.0/auth")
 public class AuthController {
 	
 	private UserAuthService userAuthService;
@@ -21,12 +21,12 @@ public class AuthController {
 		this.userAuthService = userAuthService;
 	}
 	
-	@PostMapping("auth")
+	@PostMapping("/login")
 	AuthResult handleAuthentication(@RequestBody Credentials credentials) {
 		return userAuthService.authenticate(credentials);
 	}
 	
-	@PostMapping("logout")
+	@PostMapping("/logout")
 	Result handleLogout(@RequestHeader(name = "Authorization") String authorization) {
 		String token = authorization.substring(7);
 		userAuthService.clearToken(token);

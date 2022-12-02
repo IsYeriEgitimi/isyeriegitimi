@@ -6,4 +6,5 @@ import com.fu.isyeri.entities.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer>{
 
+	Role findByLevel(byte level);
 }

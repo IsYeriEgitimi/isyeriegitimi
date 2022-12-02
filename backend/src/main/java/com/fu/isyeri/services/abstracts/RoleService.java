@@ -12,4 +12,6 @@ public interface RoleService {
 	Result add(Role role);
 	
 	Result delete(int id);
+	
+	Role update(Role updatedRole, int roleId);
 }

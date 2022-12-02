@@ -31,8 +31,13 @@ public class SecurityConfiguration {
 		
 		http
 			.authorizeRequests()
-				.antMatchers(HttpMethod.PUT,"/api/1.0/user/update/{username}").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/auth/logout").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/user/add").authenticated()
 				.antMatchers(HttpMethod.DELETE,"/api/1.0/user/delete/{username}").authenticated()
+				.antMatchers(HttpMethod.PUT,"/api/1.0/user/update/{username}").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/role/add").authenticated()
+				.antMatchers(HttpMethod.DELETE,"/api/1.0/role/delete").authenticated()
+				.antMatchers(HttpMethod.PUT,"/api/1.0/role/update/{roleId}").authenticated()
 			.and()
 			.authorizeRequests().anyRequest().permitAll();
 		
