@@ -5,11 +5,11 @@ export const getAllCompany = () => {
 }
 
 export const loginRequest = (credentials) => {
-    return axios.post('/api/1.0/auth', credentials);
+    return axios.post('/api/1.0/auth/login', credentials);
 }
 
 export const logoutRequest = () => {
-    return axios.post('/api/1.0/logout');
+    return axios.post('/api/1.0/auth/logout');
 }
 
 
