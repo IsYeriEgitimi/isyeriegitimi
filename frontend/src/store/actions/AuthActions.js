@@ -1,6 +1,5 @@
-import { loginRequest } from "../../api/ApiCalls";
+import { loginRequest, logoutRequest } from "../../api/ApiCalls";
 import * as ACTIONS from '../Constans';
-import { logoutRequest } from './../../api/ApiCalls';
 
 export const loginSuccessAction = (authState) => {
     return {

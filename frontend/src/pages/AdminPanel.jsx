@@ -6,7 +6,7 @@ import { logoutHandler } from '../store/actions/AuthActions';
 import { useApiProgress } from './../shared/ApiProgress';
 
 const AdminPanel = () => {
-    const pendingApiCall = useApiProgress("post", "/api/1.0/logout");
+    const pendingApiCall = useApiProgress("post", "/api/1.0/auth/logout");
     const dispatch = useDispatch();
     const navigate = useNavigate();  
 

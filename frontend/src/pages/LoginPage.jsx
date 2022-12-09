@@ -7,7 +7,7 @@ import { loginHandler } from '../store/actions/AuthActions';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const pendingApiCall = useApiProgress("post", "/api/1.0/auth");
+    const pendingApiCall = useApiProgress("post", "/api/1.0/auth/login");
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();

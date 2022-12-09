@@ -12,6 +12,10 @@ export const logoutRequest = () => {
     return axios.post('/api/1.0/auth/logout');
 }
 
+export const companyAddRequest = (credentials) => {
+    return axios.post('/api/1.0/company/add', credentials)
+}
+
 
 
 

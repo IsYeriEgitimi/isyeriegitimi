@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import MyLogo from '../images/logo.png';
-import '../css/Navi.css';
 import Avatar from '../components/Avatar';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +36,10 @@ const Navi = () => {
         <Menu.Item
           name='messages'
           active={activeItem === 'messages'}
-          onClick={() => handleItemClick('messages')}
+          onClick={() => {
+            handleItemClick('messages');
+            navigate("/company-add")
+          }}
         />
         <Menu.Item
           name='friends'
