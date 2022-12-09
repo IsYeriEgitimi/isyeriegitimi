@@ -1,15 +1,20 @@
 package com.fu.isyeri.services.abstracts;
 
-import java.util.List;
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.fu.isyeri.entities.Company;
 import com.fu.isyeri.result.DataResult;
 import com.fu.isyeri.result.Result;
 
 public interface CompanyService {
-	DataResult<List<Company>> getAll();
+	DataResult<Page<Company>> getAll(Pageable pageable);
 
 	Result add(Company company);
 	
 	Result delete(int id);
+
+	Company update(int id, Company updateCompany);
 }

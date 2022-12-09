@@ -32,6 +32,9 @@ public class Company {
 	@Column(name = "company_phone")
 	private String companyPhone;
 	
+	@Column(name = "company_image")
+	private String image;
+	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Protocol protocol;
 	

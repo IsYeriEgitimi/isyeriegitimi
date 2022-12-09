@@ -1,6 +1,9 @@
 package com.fu.isyeri.services.concretes;
 
-import java.util.List;
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.fu.isyeri.entities.Company;
 import com.fu.isyeri.repository.CompanyRepository;
@@ -12,18 +15,26 @@ import com.fu.isyeri.services.abstracts.CompanyService;
 public class CompanyManager implements CompanyService{
 
 	private CompanyRepository companyRepository;
+	private FileManager fileManager;
 	
-	public CompanyManager(CompanyRepository companyRepository) {
+	public CompanyManager(CompanyRepository companyRepository, FileManager fileManager) {
 		this.companyRepository = companyRepository;
+		this.fileManager = fileManager;
 	}
 	
 	@Override
-	public DataResult<List<Company>> getAll() {
-		return new DataResult<List<Company>>(companyRepository.findAll(), true, "Şirket listelendi");
+	public DataResult<Page<Company>> getAll(Pageable page) {
+		return new DataResult<Page<Company>>(companyRepository.findAll(page), true, "Şirket listelendi");
 	}
 
 	@Override
 	public Result add(Company company) {
+		if (company.getImage() != null) {
+			try {		
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(company.getImage());
+				company.setImage(storedImageName);
+			} catch (Exception e) {}
+		}
 		companyRepository.save(company);
 		return new Result(true, "Şirket eklendi");
 	}
@@ -32,6 +43,36 @@ public class CompanyManager implements CompanyService{
 	public Result delete(int id) {
 		companyRepository.deleteById(id);
 		return new Result(true, "Şirket silindi");
+	}
+
+	@Override
+	public Company update(int id, Company updateCompany){
+		Company company = companyRepository.findById(id).get();
+		
+		company.setCompanyEmail(updateCompany.getCompanyEmail());
+		company.setCompanyName(updateCompany.getCompanyName());
+		company.setCompanyPhone(updateCompany.getCompanyPhone());
+		
+		company.getAddress().setProvince(updateCompany.getAddress().getProvince());
+		company.getAddress().setDistrict(updateCompany.getAddress().getDistrict());
+		company.getAddress().setNeighborhood(updateCompany.getAddress().getNeighborhood());
+		company.getAddress().setRoad(updateCompany.getAddress().getRoad());
+		company.getAddress().setNo(updateCompany.getAddress().getNo());
+		
+		
+		if (updateCompany.getImage() != null) {
+			try {		
+				
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getImage());
+				company.setImage(storedImageName);
+			} catch (Exception e) {}
+		}
+		
+		
+		if (updateCompany.getProtocol() != null) {
+			company.setProtocol(updateCompany.getProtocol());
+		}
+		return companyRepository.save(company);
 	}
 
 }
