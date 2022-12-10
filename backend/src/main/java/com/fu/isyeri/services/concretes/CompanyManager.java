@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.fu.isyeri.entities.Company;
+import com.fu.isyeri.enums.FileEnum;
 import com.fu.isyeri.repository.CompanyRepository;
 import com.fu.isyeri.result.DataResult;
 import com.fu.isyeri.result.Result;
@@ -31,8 +32,14 @@ public class CompanyManager implements CompanyService{
 	public Result add(Company company) {
 		if (company.getImage() != null) {
 			try {		
-				String storedImageName = fileManager.writeBase64EncodedStringtoFile(company.getImage());
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(company.getImage(), FileEnum.Image);
 				company.setImage(storedImageName);
+			} catch (Exception e) {}
+		}
+		if (company.getProtocol() != null) {
+			try {
+				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(company.getProtocol().getProtocolName(), FileEnum.Protocol);	
+				company.getProtocol().setProtocolName(storedProtocolName);			
 			} catch (Exception e) {}
 		}
 		companyRepository.save(company);
@@ -63,14 +70,18 @@ public class CompanyManager implements CompanyService{
 		if (updateCompany.getImage() != null) {
 			try {		
 				
-				String storedImageName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getImage());
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getImage(), FileEnum.Image);
 				company.setImage(storedImageName);
 			} catch (Exception e) {}
 		}
-		
+				
 		
 		if (updateCompany.getProtocol() != null) {
-			company.setProtocol(updateCompany.getProtocol());
+			try {
+				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getProtocol().getProtocolName(), FileEnum.Protocol);	
+				company.getProtocol().setProtocolName(storedProtocolName);		
+				company.getProtocol().setProtocolFileType(updateCompany.getProtocol().getProtocolFileType());
+			} catch (Exception e) {}
 		}
 		return companyRepository.save(company);
 	}

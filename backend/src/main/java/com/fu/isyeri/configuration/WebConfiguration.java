@@ -21,10 +21,15 @@ public class WebConfiguration implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 			
-		// http://localhost:8080/images/profile.png
+		registry.addResourceHandler("/protocols/**")
+		.addResourceLocations("file:./"+appConfiguration.getProtocolStoragePath()+"/")
+		.setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
+		
 		registry.addResourceHandler("/images/**")
 		.addResourceLocations("file:./"+appConfiguration.getImageStoragePath()+"/")
 		.setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
+		
+		
 	}
 	
 	

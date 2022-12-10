@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
 import com.fu.isyeri.configuration.AppConfiguration;
+import com.fu.isyeri.enums.FileEnum;
 import com.fu.isyeri.repository.ProtocolRepository;
 
 @Service
@@ -24,21 +25,27 @@ public class FileManager {
 		this.protocolRepository = protocolRepository;
 	}
 
-	public String writeBase64EncodedStringtoFile(String image) throws IOException {
+	public String writeBase64EncodedStringtoFile(String file, FileEnum fileEnum) throws IOException {
 		String fileName = generateRandomName();
-		File target = new File(appConfiguration.getImageStoragePath()+"/"+fileName);
+		File target = (fileEnum == FileEnum.Image) ? 
+				new File(appConfiguration.getImageStoragePath()+"/"+fileName) : new File(appConfiguration.getProtocolStoragePath()+"/"+fileName);
+		
 		try {
 			OutputStream outputStream = new FileOutputStream(target);
-			byte[] base64Encoded = Base64.getDecoder().decode(image);
+			byte[] base64Encoded = Base64.getDecoder().decode(file);
 			outputStream.write(base64Encoded);
 			outputStream.close();
-		} catch (Exception e) {
-			System.out.println(e);
+		}
+		catch (Exception e) { System.out.println(e); }
+		
+			return fileName;
 		}
 		
 		
-		return fileName;
-	}
+		
+		
+		
+	
 	public String generateRandomName() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
