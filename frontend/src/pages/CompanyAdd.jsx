@@ -11,7 +11,11 @@ const CompanyAdd = () => {
     const pendingApiCall = useApiProgress("post", "/api/1.0/company/add");
     const [address, setAddress] = useState();
     const [company, setCompany] = useState();
-    const [protocol, setProtocol] = useState();
+    const [protocol, setProtocol] = useState(
+        {
+            protocolFileType: "PDF"
+        }
+    );
     const [error, setError] = useState();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,7 +26,7 @@ const CompanyAdd = () => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
-           console.log(fileReader.result);
+            setProtocol({ ...protocol, protocolName: fileReader.result.split(',')[1] });
         }
         fileReader.readAsDataURL(file);
 
@@ -32,7 +36,7 @@ const CompanyAdd = () => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
-            setCompany( { ...company, image: fileReader.result.split(',')[1]  } );
+            setCompany({ ...company, image: fileReader.result.split(',')[1] });
         }
         fileReader.readAsDataURL(file);
 
@@ -103,14 +107,14 @@ const CompanyAdd = () => {
                             </Form.Field>
                             <Form.Field>
                                 <label>Logo / Fotoğraf</label>
-                                <input name='image' type='file' onChange={onChangeImage} />
+                                <input name='image' type='file' onChange={onChangeImage} accept="image/png, image/jpg, image/jpeg"/>
                             </Form.Field>
 
                             <Divider horizontal> PROTOKOL BİLGİSİ </Divider>
 
                             <Form.Field>
-                                <label>Protokol</label>
-                                <input name='protocol' type='file' onChange={onChangeProtocol} />
+                                <label>Protokol (PDF)</label>
+                                <input name='protocol' type='file' onChange={onChangeProtocol} accept="application/pdf"/>
                             </Form.Field>
 
                             <Form.Field>
