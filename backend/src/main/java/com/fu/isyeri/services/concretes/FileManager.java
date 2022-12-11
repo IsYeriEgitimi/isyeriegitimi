@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.UUID;
-import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
 import com.fu.isyeri.configuration.AppConfiguration;
+import com.fu.isyeri.entities.Company;
 import com.fu.isyeri.enums.FileEnum;
 import com.fu.isyeri.repository.ProtocolRepository;
 
@@ -17,11 +19,9 @@ public class FileManager {
 	
 	ProtocolRepository protocolRepository;
 	AppConfiguration appConfiguration;
-	Tika tika;
 	
 	public FileManager(AppConfiguration appConfiguration, ProtocolRepository protocolRepository) {
 		this.appConfiguration = appConfiguration;
-		this.tika = new Tika();
 		this.protocolRepository = protocolRepository;
 	}
 
@@ -41,15 +41,33 @@ public class FileManager {
 			return fileName;
 		}
 		
-		
-		
-		
-		
-	
+
 	public String generateRandomName() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
+	public void deleteCompanyFile(String file, FileEnum fileEnum) {
+		try {
+			if (fileEnum == FileEnum.Image) {		
+				Files.deleteIfExists(Paths.get(appConfiguration.getImageStoragePath(), file));
+			}else if (fileEnum == FileEnum.Protocol) {
+				Files.deleteIfExists(Paths.get(appConfiguration.getProtocolStoragePath(), file));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
+	public void deleteAllStoredFileForCompany(Company company) {
+		
+		if (company.getImage() != null) {
+			deleteCompanyFile(company.getImage(), FileEnum.Image);
+		}
+		if(company.getProtocol().getProtocolName() != null) {
+			deleteCompanyFile(company.getProtocol().getProtocolName(), FileEnum.Protocol);
+		}
+		
+	}
 
 }
