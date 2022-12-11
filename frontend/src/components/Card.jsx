@@ -50,7 +50,7 @@ const MyCard = () => {
                 {
                   company.protocol &&
                   <Card.Content extra>
-                    <a href={`protocols/${company.protocol.protocolName}.pdf`}>
+                    <a href={`protocols/${company.protocol.protocolName}`}>
                       <Icon name='book' />
                       {"Protokol: "+company.companyName}
                     </a>

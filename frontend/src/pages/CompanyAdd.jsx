@@ -11,11 +11,7 @@ const CompanyAdd = () => {
     const pendingApiCall = useApiProgress("post", "/api/1.0/company/add");
     const [address, setAddress] = useState();
     const [company, setCompany] = useState();
-    const [protocol, setProtocol] = useState(
-        {
-            protocolFileType: "PDF"
-        }
-    );
+    const [protocol, setProtocol] = useState();
     const [error, setError] = useState();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,20 +22,21 @@ const CompanyAdd = () => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
-            setProtocol({ ...protocol, protocolName: fileReader.result.split(',')[1] });
+            setProtocol({ ...protocol, protocolName: fileReader.result.split(',')[1], protocolFileType: 'PDF' });
+            console.log(fileReader.result.split(',')[1]);
         }
         fileReader.readAsDataURL(file);
-
     }
 
     const onChangeImage = (event) => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
+        
         fileReader.onloadend = () => {
             setCompany({ ...company, image: fileReader.result.split(',')[1] });
+            console.log(fileReader.result.split(',')[1] );
         }
         fileReader.readAsDataURL(file);
-
     }
 
     const onClickLogin = async (event) => {
@@ -51,7 +48,6 @@ const CompanyAdd = () => {
         }
         try {
             await companyAddRequest(companyState);
-            console.log(companyState);
         } catch (apiError) {
             if (apiError.response.data.validationErrors) {
                 setError(apiError.response.data.validationErrors);
