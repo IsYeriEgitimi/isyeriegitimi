@@ -28,7 +28,7 @@ public class FileManager {
 	public String writeBase64EncodedStringtoFile(String file, FileEnum fileEnum) throws IOException {
 		String fileName = generateRandomName();
 		File target = (fileEnum == FileEnum.Image) ? 
-				new File(appConfiguration.getImageStoragePath()+"/"+fileName) : new File(appConfiguration.getProtocolStoragePath()+"/"+fileName);
+				new File(appConfiguration.getImageStoragePath()+"/"+fileName) : new File(appConfiguration.getProtocolStoragePath()+"/"+fileName+".pdf");
 		
 		try {
 			OutputStream outputStream = new FileOutputStream(target);
@@ -64,7 +64,7 @@ public class FileManager {
 		if (company.getImage() != null) {
 			deleteCompanyFile(company.getImage(), FileEnum.Image);
 		}
-		if(company.getProtocol().getProtocolName() != null) {
+		if(company.getProtocol() != null) {
 			deleteCompanyFile(company.getProtocol().getProtocolName(), FileEnum.Protocol);
 		}
 		

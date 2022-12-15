@@ -38,7 +38,7 @@ public class StudentManager implements StudentService{
 	public Student update(int id, Student updateStudent) {
 		Student student = studentRepository.findById(id).get();
 		student.setStudentCompany(updateStudent.getStudentCompany());
-		student.setStudentDepartment(updateStudent.getStudentDepartment());
+		student.setStudentNo(updateStudent.getStudentNo());
 		student.setStudentFullName(updateStudent.getStudentFullName());
 		return studentRepository.save(student);
 	}
