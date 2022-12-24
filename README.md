@@ -32,7 +32,7 @@ Grup üyeleri
   ![Usecase vpd](https://user-images.githubusercontent.com/115798059/209449851-8b016a83-e3d9-40a6-bb8e-183112bf7d73.png)
 
   
-  * ER 
+  * ER (ENTİTY RELATİONSHİP)
   
   ![Proje_ER](https://user-images.githubusercontent.com/115798059/200510063-b2c00f14-7e71-42a7-b4a6-181e247ee1de.png)
   
