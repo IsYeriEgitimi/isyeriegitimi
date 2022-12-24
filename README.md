@@ -15,7 +15,7 @@ Grup üyeleri
 * Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği bölümünde okuyan 4. sınıfta iş yeri eğitimi alacak öğrenciler için okulumuzun anlaşma sağladığı şirketler hakkında bilgi ve öneri veren bir sistem oluşturmak. 
 
 # Misyonumuz
-* İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini filtreleyip kendine en uygun iş yerini bulmasını sağlamak.
+* İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini görüntüleyip kendine en uygun iş yerini bulmasını sağlamak.
 * Son iki sene içerisindeki anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
 
 # DİYAGRAMLAR
