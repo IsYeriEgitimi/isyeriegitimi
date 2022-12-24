@@ -18,6 +18,9 @@ Grup üyeleri
 * İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini görüntüleyip kendine en uygun iş yerini bulmasını sağlamak.
 * Son iki sene içerisindeki anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
 
+## TASARIM KALIPLARI
+
+
 # DİYAGRAMLAR
   * USE-CASE
   
