@@ -18,10 +18,12 @@ Grup üyeleri
 * İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini görüntüleyip kendine en uygun iş yerini bulmasını sağlamak.
 * Son iki sene içerisindeki anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
 
-## TASARIM KALIPLARI
+# KULLANILAN TASARIM KALIPLARI
+* STATE
+* SECURİTY PROXY
+* SİNGLETON
 
-
-# DİYAGRAMLAR
+# KULLANILAN DİYAGRAMLAR
   * USE-CASE
   
   ![Usecase vpd](https://user-images.githubusercontent.com/115798059/209449851-8b016a83-e3d9-40a6-bb8e-183112bf7d73.png)
