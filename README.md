@@ -36,6 +36,7 @@ Grup üyeleri
   
   * CLASS
   
-  ![class diagram](https://user-images.githubusercontent.com/115798059/209449859-5cca18e4-a79d-4785-993c-313924d8baa7.png)
+  ![class diagram](https://user-images.githubusercontent.com/115798059/209450361-255a785c-a740-4e79-a512-ea7ae8d07082.png)
+
 
 
