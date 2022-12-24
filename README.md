@@ -5,23 +5,26 @@ Grup üyeleri
 * Ömer TEMEL (Full-Stack Developer)
 * Burak F. CİLBİR (Frontend Developer)
 
-# Kullanılan Teknolojiler
+# KULLANILAN TEKNOLOJİLER
 * Java
 * React
 * MySQL
 
 
-# Amacımız
+# AMACIMIZ
 * Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği bölümünde okuyan 4. sınıfta iş yeri eğitimi alacak öğrenciler için okulumuzun anlaşma sağladığı şirketler hakkında bilgi ve öneri veren bir sistem oluşturmak. 
 
-# Misyonumuz
+
+# MİSYONUMUZ
 * İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini görüntüleyip kendine en uygun iş yerini bulmasını sağlamak.
 * Son iki sene içerisindeki anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
+
 
 # KULLANILAN TASARIM KALIPLARI
 * STATE
 * SECURİTY PROXY
 * SİNGLETON
+
 
 # KULLANILAN DİYAGRAMLAR
   * USE-CASE
