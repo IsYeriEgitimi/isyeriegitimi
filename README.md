@@ -5,25 +5,41 @@ Grup üyeleri
 * Ömer TEMEL (Full-Stack Developer)
 * Burak F. CİLBİR (Frontend Developer)
 
-# Kullanılan Teknolojiler
+# KULLANILAN TEKNOLOJİLER
 * Java
 * React
 * MySQL
 
 
-# Amacımız
+# AMACIMIZ
 * Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği bölümünde okuyan 4. sınıfta iş yeri eğitimi alacak öğrenciler için okulumuzun anlaşma sağladığı şirketler hakkında bilgi ve öneri veren bir sistem oluşturmak. 
 
-# Misyonumuz
-* İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini filtreleyip kendisine en uygun iş yerini bulmasını sağlamak.
+
+# MİSYONUMUZ
+* İş yeri eğitimi alacak öğrenciler, kendi yeteneklerine göre iş yerlerini görüntüleyip kendine en uygun iş yerini bulmasını sağlamak.
 * Son iki sene içerisindeki anlaşmalı olan şirketlere okulumuz öğrencileri tarafından yapılan başvurular ve bu başvuruların kabul oranı.
 
-# DİYAGRAMLAR
+
+# KULLANILAN TASARIM KALIPLARI
+* STATE
+* SECURİTY PROXY
+* SİNGLETON
+
+
+# KULLANILAN DİYAGRAMLAR
   * USE-CASE
   
-  ![Proje_use-case](https://user-images.githubusercontent.com/115798059/200509572-8b6758c8-d1ec-4638-97d8-102965a26eb7.png)
+  ![Usecase vpd](https://user-images.githubusercontent.com/115798059/209449851-8b016a83-e3d9-40a6-bb8e-183112bf7d73.png)
+
   
-  * ER 
+  * ER (ENTİTY RELATİONSHİP)
   
   ![Proje_ER](https://user-images.githubusercontent.com/115798059/200510063-b2c00f14-7e71-42a7-b4a6-181e247ee1de.png)
+  
+  
+  * CLASS
+  
+  ![class diagram](https://user-images.githubusercontent.com/115798059/209450361-255a785c-a740-4e79-a512-ea7ae8d07082.png)
+
+
 
