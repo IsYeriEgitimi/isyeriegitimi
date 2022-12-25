@@ -32,6 +32,11 @@ public class CompanyController {
 		return companyService.getAll(pageable);
 	}
 	
+	@GetMapping("/getCompany/{companyName}")
+	public DataResult<Page<Company>> findByCompanyName (@PathVariable String companyName, Pageable pageable){
+		return companyService.findByCompanyName(companyName, pageable);
+	}
+	
 	@PostMapping("/add")
 	public Result add(@Valid @RequestBody Company company) {
 		return companyService.add(company);

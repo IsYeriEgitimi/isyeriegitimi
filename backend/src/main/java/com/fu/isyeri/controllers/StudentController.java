@@ -1,5 +1,7 @@
 package com.fu.isyeri.controllers;
 
+import java.text.ParseException;
+
 import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +47,11 @@ private StudentService studentService;
 	public DataResult<Student> update(@Valid @RequestBody Student updateStudent, @PathVariable int id) {
 		Student student = studentService.update(id, updateStudent);
 		return new DataResult<Student>(student, true, "Öğrenci güncellendi");
+	}
+	
+	@GetMapping("/findByDate/{year}")
+	public DataResult<Page<Student>> findByDate(@PathVariable String year, Pageable pageable) throws ParseException{
+		return studentService.findByDate(year, pageable);
 	}
 
 }

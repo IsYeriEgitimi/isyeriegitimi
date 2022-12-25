@@ -10,7 +10,7 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "isyeri")
 public class AppConfiguration {
 
-	private String uploadPath;
+	private String uploadPath = "file-storage";
 	
 	private String protocolStorage = "protocol-storage";
 	

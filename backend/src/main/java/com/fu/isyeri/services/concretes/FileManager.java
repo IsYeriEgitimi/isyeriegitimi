@@ -9,26 +9,31 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
-import com.fu.isyeri.configuration.AppConfiguration;
 import com.fu.isyeri.entities.Company;
-import com.fu.isyeri.enums.FileEnum;
 import com.fu.isyeri.repository.ProtocolRepository;
+import com.fu.isyeri.strategies.abstracts.FileTypeStrategy;
+import com.fu.isyeri.strategies.concretes.ImageFileTypeStrategy;
+import com.fu.isyeri.strategies.concretes.ProtocolFileTypeStrategy;
 
 @Service
 public class FileManager {
 	
 	ProtocolRepository protocolRepository;
-	AppConfiguration appConfiguration;
 	
-	public FileManager(AppConfiguration appConfiguration, ProtocolRepository protocolRepository) {
-		this.appConfiguration = appConfiguration;
+	public FileManager(ProtocolRepository protocolRepository) {
 		this.protocolRepository = protocolRepository;
 	}
 
-	public String writeBase64EncodedStringtoFile(String file, FileEnum fileEnum) throws IOException {
+	public String writeBase64EncodedStringtoFile(String file, FileTypeStrategy fileTypeStrategy) throws IOException {
 		String fileName = generateRandomName();
-		File target = (fileEnum == FileEnum.Image) ? 
-				new File(appConfiguration.getImageStoragePath()+"/"+fileName) : new File(appConfiguration.getProtocolStoragePath()+"/"+fileName+".pdf");
+		
+		if (fileTypeStrategy.getClass() == ProtocolFileTypeStrategy.class) {			
+			fileName += ".pdf";
+		}
+		
+		File target = new File(fileTypeStrategy.getStoragePath()+"/"+fileName);
+		
+		
 		
 		try {
 			OutputStream outputStream = new FileOutputStream(target);
@@ -36,23 +41,19 @@ public class FileManager {
 			outputStream.write(base64Encoded);
 			outputStream.close();
 		}
-		catch (Exception e) { System.out.println(e); }
+		catch (Exception e) { System.out.println("FileManager HATA: "+e); }
 		
-			return fileName;
-		}
+		return fileName;
+	}
 		
 
 	public String generateRandomName() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
-	public void deleteCompanyFile(String file, FileEnum fileEnum) {
+	public void deleteCompanyFile(String file, FileTypeStrategy fileTypeStrategy) {
 		try {
-			if (fileEnum == FileEnum.Image) {		
-				Files.deleteIfExists(Paths.get(appConfiguration.getImageStoragePath(), file));
-			}else if (fileEnum == FileEnum.Protocol) {
-				Files.deleteIfExists(Paths.get(appConfiguration.getProtocolStoragePath(), file));
-			}
+			Files.deleteIfExists(Paths.get(fileTypeStrategy.getStoragePath(), file));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -62,10 +63,10 @@ public class FileManager {
 	public void deleteAllStoredFileForCompany(Company company) {
 		
 		if (company.getImage() != null) {
-			deleteCompanyFile(company.getImage(), FileEnum.Image);
+			deleteCompanyFile(company.getImage(), new ImageFileTypeStrategy());
 		}
 		if(company.getProtocol() != null) {
-			deleteCompanyFile(company.getProtocol().getProtocolName(), FileEnum.Protocol);
+			deleteCompanyFile(company.getProtocol().getProtocolName(), new ProtocolFileTypeStrategy());
 		}
 		
 	}

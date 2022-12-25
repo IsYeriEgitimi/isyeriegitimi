@@ -17,4 +17,6 @@ public interface CompanyService {
 	Result delete(int id);
 
 	Company update(int id, Company updateCompany);
+
+	DataResult<Page<Company>> findByCompanyName(String companyName, Pageable pageable);
 }

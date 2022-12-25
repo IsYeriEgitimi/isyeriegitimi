@@ -5,12 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.fu.isyeri.entities.Company;
-import com.fu.isyeri.enums.FileEnum;
 import com.fu.isyeri.repository.CompanyRepository;
-import com.fu.isyeri.repository.ProtocolRepository;
 import com.fu.isyeri.result.DataResult;
 import com.fu.isyeri.result.Result;
 import com.fu.isyeri.services.abstracts.CompanyService;
+import com.fu.isyeri.strategies.concretes.ImageFileTypeStrategy;
+import com.fu.isyeri.strategies.concretes.ProtocolFileTypeStrategy;
 
 @Service
 public class CompanyManager implements CompanyService{
@@ -18,7 +18,7 @@ public class CompanyManager implements CompanyService{
 	private CompanyRepository companyRepository;
 	private FileManager fileManager;
 	
-	public CompanyManager(CompanyRepository companyRepository, FileManager fileManager, ProtocolRepository protocolRepository) {
+	public CompanyManager(CompanyRepository companyRepository, FileManager fileManager) {
 		this.companyRepository = companyRepository;
 		this.fileManager = fileManager;
 	}
@@ -29,18 +29,25 @@ public class CompanyManager implements CompanyService{
 	}
 
 	@Override
+	public DataResult<Page<Company>> findByCompanyName(String companyName, Pageable pageable) {
+		
+		return new DataResult<Page<Company>>(companyRepository.findByCompanyNameContains(companyName, pageable), true, "Şirket listelendi");
+	}
+	
+	@Override
 	public Result add(Company company) {
+		
 		if (company.getImage() != null) {
 			try {		
-				String storedImageName = fileManager.writeBase64EncodedStringtoFile(company.getImage(), FileEnum.Image);
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(company.getImage(), new ImageFileTypeStrategy());
 				company.setImage(storedImageName);
-			} catch (Exception e) {}
+			} catch (Exception e) { System.out.println("İmage HATA: "+e);  }
 		}
 		if (company.getProtocol() != null) {
 			try {
-				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(company.getProtocol().getProtocolName(), FileEnum.Protocol);	
+				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(company.getProtocol().getProtocolName(), new ProtocolFileTypeStrategy());	
 				company.getProtocol().setProtocolName(storedProtocolName);			
-			} catch (Exception e) {}
+			} catch (Exception e) { System.out.println("protocol HATA: "+e);}
 		}
 		companyRepository.save(company);
 		return new Result(true, "Şirket eklendi");
@@ -75,11 +82,11 @@ public class CompanyManager implements CompanyService{
 		if (updateCompany.getImage() != null) {
 			try {			
 				String oldCompanyImage = company.getImage();
-				String storedImageName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getImage(), FileEnum.Image);
+				String storedImageName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getImage(), new ImageFileTypeStrategy());
 				company.setImage(storedImageName);
 				
 				if(oldCompanyImage != null) {				
-					fileManager.deleteCompanyFile(oldCompanyImage, FileEnum.Image);
+					fileManager.deleteCompanyFile(oldCompanyImage, new ImageFileTypeStrategy());
 				}
 			} catch (Exception e) {}
 			
@@ -88,7 +95,7 @@ public class CompanyManager implements CompanyService{
 		if (updateCompany.getProtocol() != null) {
 			try {
 				String oldCompanyProtocolName = company.getProtocol().getProtocolName();				
-				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getProtocol().getProtocolName(), FileEnum.Protocol);	
+				String storedProtocolName = fileManager.writeBase64EncodedStringtoFile(updateCompany.getProtocol().getProtocolName(), new ProtocolFileTypeStrategy());	
 				if (company.getProtocol() == null) {
 					company.setProtocol(updateCompany.getProtocol());
 				}else {
@@ -96,12 +103,13 @@ public class CompanyManager implements CompanyService{
 					company.getProtocol().setProtocolFileType(updateCompany.getProtocol().getProtocolFileType());
 				}
 				if (oldCompanyProtocolName != null) {				
-					fileManager.deleteCompanyFile(oldCompanyProtocolName, FileEnum.Protocol);
+					fileManager.deleteCompanyFile(oldCompanyProtocolName, new ProtocolFileTypeStrategy());
 				}
 			} catch (Exception e) {}
 			
 		}
 		return companyRepository.save(company);
 	}
+
 
 }
