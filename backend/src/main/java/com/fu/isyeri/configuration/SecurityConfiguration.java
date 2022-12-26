@@ -38,6 +38,10 @@ public class SecurityConfiguration {
 				.antMatchers(HttpMethod.POST,"/api/1.0/role/add").authenticated()
 				.antMatchers(HttpMethod.DELETE,"/api/1.0/role/delete").authenticated()
 				.antMatchers(HttpMethod.PUT,"/api/1.0/role/update/{roleId}").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/comment/add").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/company/add").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/company/delete/{id}").authenticated()
+				.antMatchers(HttpMethod.POST,"/api/1.0/company/update/{id}").authenticated()
 			.and()
 			.authorizeRequests().anyRequest().permitAll();
 		

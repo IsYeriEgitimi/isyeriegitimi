@@ -4,6 +4,7 @@ package com.fu.isyeri.controllers;
 import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,16 +39,19 @@ public class CompanyController {
 	}
 	
 	@PostMapping("/add")
+	@PreAuthorize("principal.role.level == 2")
 	public Result add(@Valid @RequestBody Company company) {
 		return companyService.add(company);
 	}
 	
 	@DeleteMapping("/delete/{id}")
+	@PreAuthorize("principal.role.level == 2")
 	public Result delete(@PathVariable int id) {
 		return companyService.delete(id);
 	}
 	
 	@PutMapping("/update/{id}")
+	@PreAuthorize("principal.role.level == 2")
 	public DataResult<Company> update(@Valid @RequestBody Company updateCompany, @PathVariable int id) {
 		Company company = companyService.update(id, updateCompany);
 		return new DataResult<Company>(company, true, "Şirket güncellendi");

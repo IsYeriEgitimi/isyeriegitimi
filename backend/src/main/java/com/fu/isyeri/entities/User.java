@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fu.isyeri.annotations.UniqueUsername;
 
 import lombok.Data;
@@ -29,6 +31,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "comment" })
 public class User implements UserDetails{
 
 	/**
@@ -68,6 +71,9 @@ public class User implements UserDetails{
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Token> token;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Comment> comment;
 
 
 	@Override
