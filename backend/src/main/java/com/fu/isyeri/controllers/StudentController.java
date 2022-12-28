@@ -1,10 +1,11 @@
 package com.fu.isyeri.controllers;
 
 import java.text.ParseException;
-
+import java.util.Date;
 import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,9 +50,9 @@ private StudentService studentService;
 		return new DataResult<Student>(student, true, "Öğrenci güncellendi");
 	}
 	
-	@GetMapping("/findByDate/{year}")
-	public DataResult<Page<Student>> findByDate(@PathVariable String year, Pageable pageable) throws ParseException{
-		return studentService.findByDate(year, pageable);
+	@GetMapping("/findByDate/{start}-{end}")
+	public DataResult<Page<Student>> findByDate(@PathVariable @DateTimeFormat(pattern = "yyyy") Date start, @PathVariable @DateTimeFormat(pattern = "yyyy") Date end, Pageable pageable) throws ParseException{
+		return studentService.findByDate(start, end, pageable);
 	}
 
 }

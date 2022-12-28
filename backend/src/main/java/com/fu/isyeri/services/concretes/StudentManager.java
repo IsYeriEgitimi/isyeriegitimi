@@ -1,7 +1,6 @@
 package com.fu.isyeri.services.concretes;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,12 +44,9 @@ public class StudentManager implements StudentService{
 	}
 
 	@Override
-	public DataResult<Page<Student>> findByDate(String year, Pageable pageable) throws ParseException{
-		SimpleDateFormat format = new SimpleDateFormat("yyyy");
+	public DataResult<Page<Student>> findByDate(Date start, Date end, Pageable pageable) throws ParseException{
 		
-		Date date = format.parse(year);	
-		System.out.println(date);
-		return null;
+		return new DataResult<Page<Student>>(studentRepository.findByStudentDateBetween(start, end, pageable), true);
 	}
 
 }

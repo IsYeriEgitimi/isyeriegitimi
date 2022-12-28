@@ -1,7 +1,7 @@
 package com.fu.isyeri.services.abstracts;
 
 import java.text.ParseException;
-
+import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.fu.isyeri.entities.Student;
@@ -18,6 +18,6 @@ public interface StudentService {
 
 	Student update(int id, Student updateStudent);
 
-	DataResult<Page<Student>> findByDate(String year, Pageable pageable) throws ParseException;
+	DataResult<Page<Student>> findByDate(Date start, Date end,Pageable pageable) throws ParseException;
 
 }

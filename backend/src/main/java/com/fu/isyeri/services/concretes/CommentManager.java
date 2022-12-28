@@ -24,7 +24,7 @@ public class CommentManager implements CommentService{
 	@Override
 	public Page<Comment> findByCompany(int companyId, Pageable pageable) {
 		Company company = companyRepository.findById(companyId).get();
-		return commentRepository.findByCompany(company, pageable);
+		return commentRepository.findByCompanyOrderByIdDesc(company, pageable);
 	}
 
 	@Override
