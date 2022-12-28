@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Segment, Button } from 'semantic-ui-react'
 import MyLogo from '../images/logo.png';
 import Avatar from '../components/Avatar';
 import { useSelector } from 'react-redux';
@@ -24,28 +24,28 @@ const Navi = () => {
         <Menu.Item>
           <img src={MyLogo} alt="logo" />
         </Menu.Item>
+
+	
         <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
+          name='Şirketler'
+          active={activeItem === 'Şirketler'}
           onClick={() => {
-            handleItemClick('home');
+            handleItemClick('Şirketler');
             navigate('/');
           }}
-
         />
+	
+	{isLoggedIn &&
         <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
+          name='Şirket ekle'
+          active={activeItem === 'Şirket ekle'}
           onClick={() => {
-            handleItemClick('messages');
+            handleItemClick('Şirket ekle');
             navigate("/company-add")
           }}
         />
-        <Menu.Item
-          name='friends'
-          active={activeItem === 'friends'}
-          onClick={() => handleItemClick('friends')}
-        />
+	}
+       
         {isLoggedIn &&
           <Menu.Menu position='right'>
             <Menu.Item>
@@ -53,6 +53,9 @@ const Navi = () => {
             </Menu.Item>
           </Menu.Menu>
         }
+	{!isLoggedIn &&
+	<Button />
+	}
       </Menu>
 
 
